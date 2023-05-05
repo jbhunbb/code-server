@@ -21,7 +21,7 @@ services:
       - TZ=Asia/Seoul
       - HASHED_PASSWORD=${CODE_SERVER_PW}
       - SUDO_PASSWORD_HASH=${CODE_SERVER_SUDO_PW}
-      - PROXY_DOMAIN=dev.bhji.kro.kr
+      - PROXY_DOMAIN=Domainname
       - DEFAULT_WORKSPACE=/config/workspace
     volumes:
       - ${DOCKER_DIR}/code-server/config:/config
