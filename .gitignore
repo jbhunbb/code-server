@@ -1,0 +1,3 @@
+*.env
+volume/nginx/certs/*
+volume/code-server/config/*

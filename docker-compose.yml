@@ -1,0 +1,30 @@
+version: "3.4"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${DOCKER_DIR}/nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${DOCKER_DIR}/nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - code-server
+
+
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - TZ=Asia/Seoul
+      - HASHED_PASSWORD=${CODE_SERVER_PW}
+      - SUDO_PASSWORD_HASH=${CODE_SERVER_SUDO_PW}
+      - PROXY_DOMAIN=dev.bhji.kro.kr
+      - DEFAULT_WORKSPACE=/config/workspace
+    volumes:
+      - ${DOCKER_DIR}/code-server/config:/config
+    expose:
+      - 8443
+    restart: unless-stopped
